@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODE CRAFTERS</title>
+</head>
+<body>
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="uploadImage()">Upload</button>
+    <div>
+        <h1  id="h1"></h1>
+        <h1 id="h12"></h1>
+    </div>
+    <script>
+        async function uploadImage() {
+            const fileInput = document.getElementById('imageInput');
+            const file = fileInput.files[0];
+            
+            const formData = new FormData();
+            formData.append('file',file);
+            
+            try {
+                const response = await fetch('http://127.0.0.1:800/predict', {
+                    method: 'POST',
+                    body: formData
+
+                });
+
+                if (response.ok) {
+                    const jsonResponse = await response.json();
+                     let disease=jsonResponse.class;
+                     let confidence=jsonResponse.confidence;
+                     console.log(jsonResponse);
+                    console.log(jsonResponse.class);
+                    console.log(jsonResponse.confidence);
+                    const h1=document.querySelector("h1");
+                    const h12=document.querySelector("h12");
+                  //  const newDiv = document.createElement("h1");
+                   // const newContent = document.createTextNode("disease : "+disease);
+                  //  const newContent1 = document.createTextNode("confidence : "+confidence);
+
+                    // div.appendChild(newContent);
+                    // div.appendChild(newContent1);
+                    h1.innerText=disease;
+                    h12.innerText=confidence;
+
+                } else {
+                    console.error('Failed to upload image');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
