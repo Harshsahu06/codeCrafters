@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CODE CRAFTERS</title>
+    <style>
+        img{
+          height:100%;
+          width:100%;  
+        }
+    </style>
 </head>
 <body>
     <input type="file" id="imageInput" accept="image/*">
     <button onclick="uploadImage()">Upload</button>
+<div>
+    <div>
+       <img src="https://as2.ftcdn.net/v2/jpg/01/17/12/37/1000_F_117123796_MBKR6xeMfrBdfhSWNWtjTddwUci1F2HR.jpg" alt="background image"> 
+    </div>
     <div>
         <h1  id="h1"></h1>
         <h1 id="h12"></h1>
     </div>
+</div>
     <script>
         async function uploadImage() {
             const fileInput = document.getElementById('imageInput');
@@ -43,8 +54,7 @@
                     // div.appendChild(newContent);
                     // div.appendChild(newContent1);
                     h1.innerText=disease;
-                    h12.innerText=confidence;
-
+                    h12.innerText=confidence*100;
                 } else {
                     console.error('Failed to upload image');
                 }
